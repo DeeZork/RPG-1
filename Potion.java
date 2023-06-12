@@ -3,4 +3,12 @@ class Potion extends Thing{
     public Potion(int stage, int power, int price) {
         super(potionsName[power-1], stage, power*stage, price);
     }
+
+    @Override
+    public String toString() {
+        return getName()+
+                " Ур."+getStage()+
+                " Действие +"+getPower()+
+                " Цена- "+getPrice();
+    }
 }

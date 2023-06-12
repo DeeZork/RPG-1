@@ -9,9 +9,4 @@ abstract class Thing extends Unit{
         super(name, stage, power);
         this.price = price;
     }
-
-    @Override
-    public String toString() {
-        return getName()+" цена - " + price;
-    }
 }

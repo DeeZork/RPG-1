@@ -1,4 +1,4 @@
-class Arms extends Thing {
+class Arms extends Thing{
     private int protection;
     private int weight;
     private static String[][] namesArm =new String[][]{{"Кулак","Палка","Нож","Кинжал","Короткий Меч","Средний Меч","Длинный Меч","Булава"},
@@ -23,4 +23,13 @@ class Arms extends Thing {
         this.weight = weight;
     }
 
+    @Override
+    public String toString() {
+        return getName() +
+                " Ур." + getStage()+
+                " Вас- " +getWeight()+"кг"+
+                " Атака +"+getPower()+
+                " Защита +"+getProtection() +
+                " Цена- " + getPrice();
+    }
 }

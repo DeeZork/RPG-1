@@ -28,6 +28,7 @@ public class Checker {
                 try {
                     int k = Integer.parseInt(inputHuman);
                     if ((0 < k) && (k <= num)) check = false;
+                    else throw new Exception();
                 } catch (Exception e) {
                     System.out.println("Прости... Удалец! Не понять... Повтори поразборчивее!");
                 }
