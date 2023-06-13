@@ -27,7 +27,7 @@ class Arms extends Thing{
     public String toString() {
         return getName() +
                 " Ур." + getStage()+
-                " Вас- " +getWeight()+"кг"+
+                " Вес- " +getWeight()+"кг"+
                 " Атака +"+getPower()+
                 " Защита +"+getProtection() +
                 " Цена- " + getPrice();

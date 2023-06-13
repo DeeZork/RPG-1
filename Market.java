@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 class Market extends Unit {
@@ -51,12 +52,57 @@ class Market extends Unit {
         return getName() + " товары " + getStage() + " уровня";
     }
 
+    public boolean buy(Human human, Thing thing) {
+        boolean buy = false;
+        if (thing.getPrice() > human.getWalet())
+            System.out.println("Поднакопи сперва монет, тогда и приходи!");
+        else if (thing.getName().equals(BackPack.name)) {
+            int offer = (int) (Math.random() * human.getBackPack().getPrice());
+            System.out.println("За твой мешок дам " + offer + " по рукам? (Q -Да/X -нет)");
+            if (Checker.check(0).equals("Q")) {
+                BackPack forChange = new BackPack(100, 1000, 0, human.getBackPack().getThings());
+                forChange.setFullThingsWeigt(human.getBackPack().getFullThingsWeigt());
+                human.setWalet(human.getWalet() - thing.getPrice() + offer);
+                human.setBackPack((BackPack) thing);
+                human.getBackPack().setThings(forChange.getThings());
+                human.getBackPack().setFullThingsWeigt(forChange.getFullThingsWeigt());
+                buy = true;
+            }
+        } else if (Arrays.asList(Potion.potionsName).contains(thing.getName())) {
+            human.setWalet(human.getWalet() - thing.getPrice());
+            human.getBackPack().getThings().add(thing); //NullPointerException
+            buy = true;
+
+        }
+//        else {
+//            if (human.getBackPack().getFullThingsWeigt()+thing.){
+//                human.setWalet(human.getWalet() - thing.getPrice());
+//                human.setRight((Arms) thing);
+//            }
+//        }
+        return buy;
+
+    }
+
     public void shoping(Human human) {
         System.out.println(this.getName() + "\nТовары в продаже:");
         for (int i = 0; i < this.stock.size(); i++)
             System.out.println(i + 1 + ") " + this.stock.get(i));
         System.out.println(this.getPower() + 1 + ") Скупка\nX) Выход");
         String choice = Checker.check(this.getPower());
+        switch (choice) {
+            case "X":
+                return;
+            case "Q":
+                return;
+            default: {
+//                if (choice.equals(this.getPower() + 1)) sale(human);
+                if (buy(human, stock.get(Integer.parseInt(choice) - 1))) {//Покупаем
+                    stock.remove(Integer.parseInt(choice) - 1);
+                    System.out.println("Приятно с тобой иметь дела, Удалец!");
+                }
+            }
+        }
 
 
     }
