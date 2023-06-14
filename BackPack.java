@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 class BackPack extends Thing {
@@ -12,7 +13,7 @@ class BackPack extends Thing {
 
     public BackPack(int stage, int power, int price) {
         super(name, stage, power, price);
-        this.things = null;
+        this.things = new ArrayList<>() ;
     }
 
     @Override

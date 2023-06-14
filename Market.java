@@ -70,16 +70,24 @@ class Market extends Unit {
             }
         } else if (Arrays.asList(Potion.potionsName).contains(thing.getName())) {
             human.setWalet(human.getWalet() - thing.getPrice());
-            human.getBackPack().getThings().add(thing); //NullPointerException
+            human.getBackPack().getThings().add(thing);
             buy = true;
 
+        } else {
+            if ((human.getBackPack().getFullThingsWeigt() + ((Arms) thing).getWeight()) <= human.getBackPack().getPower()) {
+                human.setWalet(human.getWalet() - thing.getPrice());
+                human.getBackPack().getThings().add(thing);
+                buy = true;
+            } else if (human.getRight().equals(Arms.getNamesArm(0, 0))) {
+                human.setWalet(human.getWalet() - thing.getPrice());
+                human.setRight((Arms) thing);
+                buy = true;
+            } else if (human.getLeft().equals(Arms.getNamesArm(0, 0))) {
+                human.setWalet(human.getWalet() - thing.getPrice());
+                human.setLeft((Arms) thing);
+                buy = true;
+            } else System.out.println("Ты и так полон под завязку! Может что продать пожелаешь? Предложи свой товар!");
         }
-//        else {
-//            if (human.getBackPack().getFullThingsWeigt()+thing.){
-//                human.setWalet(human.getWalet() - thing.getPrice());
-//                human.setRight((Arms) thing);
-//            }
-//        }
         return buy;
 
     }
