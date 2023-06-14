@@ -59,7 +59,7 @@ public class City extends Unit {
 //            case "X":{ goToForest(human);
 //                    break;}
                 default:
-                    this.market.get(Integer.parseInt(choice) - 1).shoping(human);
+                    this.market.get(Integer.parseInt(choice) - 1).shopping(human);
             }
         } while (flag);
     }

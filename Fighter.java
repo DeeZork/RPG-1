@@ -58,7 +58,7 @@ abstract class Fighter extends Unit{
 
     public String[] getWhoop() {
         return whoop;
-    }
+    }//реализовать отбор одного значения из массива
 
     public int getLive() {
         return live;

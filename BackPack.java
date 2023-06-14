@@ -3,8 +3,8 @@ import java.util.List;
 
 class BackPack extends Thing {
     private List<Thing> things;
-    private int fullThingsWeigt=0;
-    public static String name="Заплечный мешок";
+//    private int fullThingsWeigt = 0;
+    public static String name = "Заплечный мешок";
 
     public BackPack(int stage, int power, int price, List<Thing> things) {
         super(name, stage, power, price);
@@ -13,15 +13,15 @@ class BackPack extends Thing {
 
     public BackPack(int stage, int power, int price) {
         super(name, stage, power, price);
-        this.things = new ArrayList<>() ;
+        this.things = new ArrayList<>();
     }
 
     @Override
     public String toString() {
         return getName() +
-                " Ур." + getStage()+
-                " Грузоподъемность- "+ getPower()+"кг"+
-                " Цена- "+getPrice();
+                " Ур." + getStage() +
+                " Грузоподъемность- " + getPower() + "кг" +
+                " Цена- " + getPrice();
     }
 
     public List<Thing> getThings() {
@@ -33,11 +33,12 @@ class BackPack extends Thing {
     }
 
     public int getFullThingsWeigt() {
+        int fullThingsWeigt = 0;
+        for (Thing thing : things) {
+            Class<?> clazz = thing.getClass();
+            if (clazz.getSimpleName().equals("Arms"))
+                fullThingsWeigt += ((Arms) thing).getWeight();
+        }
         return fullThingsWeigt;
     }
-
-    public void setFullThingsWeigt(int fullThingsWeigt) {
-        this.fullThingsWeigt = fullThingsWeigt;
-    }
-
 }
