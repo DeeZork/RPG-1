@@ -13,6 +13,8 @@ public class Main {
         City city = new City(1);
         Human human = new Human(Checker.check(), city);
         System.out.println("Удачи тебе, " + human.getName() + "- богатырь и скатертью дорога!\n");
+        Dressed dressHuman=new Dressed(human);
+        dressHuman.start();
         city.goToCity(human);
     }
 

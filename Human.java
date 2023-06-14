@@ -1,5 +1,3 @@
-import java.util.List;
-
 class Human extends Fighter{
     private int experience;
     private City place;
@@ -11,6 +9,10 @@ class Human extends Fighter{
                 new Arms(Arms.getNamesArm(0,0),1,1,0,1,0));
         this.experience = 0;
         this.place=place;
+    }
+
+    public synchronized void dressed() {
+        System.out.println("Переодеваемся");
     }
 
     public void setPlace(City place) {
