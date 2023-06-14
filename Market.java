@@ -94,24 +94,25 @@ class Market extends Unit {
 
     public void shoping(Human human) {
         System.out.println(this.getName() + "\nТовары в продаже:");
-        for (int i = 0; i < this.stock.size(); i++)
-            System.out.println(i + 1 + ") " + this.stock.get(i));
-        System.out.println(this.getPower() + 1 + ") Скупка\nX) Выход");
-        String choice = Checker.check(this.getPower());
-        switch (choice) {
-            case "X":
-                return;
-            case "Q":
-                return;
-            default: {
+        while (true) {
+            for (int i = 0; i < this.stock.size(); i++)
+                System.out.println(i + 1 + ") " + this.stock.get(i));
+            System.out.println(this.getPower() + 1 + ") Предложи свой товар, готов дать хорошую цену!\nX) Выход");
+            String choice = Checker.check(this.getPower());
+            switch (choice) {
+                case "X":
+                    return; // почему рвет цикл?
+                case "Q":
+                    break;// почему не рвет цикл?
+                default: {
 //                if (choice.equals(this.getPower() + 1)) sale(human);
-                if (buy(human, stock.get(Integer.parseInt(choice) - 1))) {//Покупаем
-                    stock.remove(Integer.parseInt(choice) - 1);
-                    System.out.println("Приятно с тобой иметь дела, Удалец!");
+                    if (buy(human, stock.get(Integer.parseInt(choice) - 1))) {//Покупаем
+                        stock.remove(Integer.parseInt(choice) - 1);
+                        System.out.println("Приятно с тобой иметь дела, Удалец!\nЧто то еще?");
+                    }
                 }
             }
         }
-
 
     }
 }
