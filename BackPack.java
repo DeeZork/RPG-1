@@ -3,7 +3,6 @@ import java.util.List;
 
 class BackPack extends Thing {
     private List<Thing> things;
-//    private int fullThingsWeigt = 0;
     public static String name = "Заплечный мешок";
 
     public BackPack(int stage, int power, int price, List<Thing> things) {

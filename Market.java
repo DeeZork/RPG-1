@@ -149,8 +149,9 @@ class Market extends Unit {
             System.out.println("Товары в продаже:");
             for (int i = 0; i < this.stock.size(); i++)
                 System.out.println(i + 1 + ") " + this.stock.get(i));
-            System.out.println("Q) Предложи свой товар, готов дать хорошую цену!\nX) Выход");
-            String choice = Checker.check(this.stock.size());
+            String i = String.valueOf(this.stock.size() + 1);
+            System.out.println(i + ") Экипировочная комната\nQ) Предложи свой товар, готов дать хорошую цену!\nX) Выход");
+            String choice = Checker.check(this.stock.size() + 1);
             switch (choice) {
                 case "X":
                     return;
@@ -160,7 +161,12 @@ class Market extends Unit {
                     }
                     break;
                 }
-                default: {//Покупаем
+                default: {//Экипируемся
+                    if (choice.equals(i)) {
+                        human.dressed();
+                        break;
+                    }
+                    //Покупаем
                     if (buy(human, stock.get(Integer.parseInt(choice) - 1))) {
                         stock.remove(Integer.parseInt(choice) - 1);
                         System.out.println("Приятно с тобой иметь дела, Удалец!\nЧто то еще?");

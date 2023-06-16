@@ -1,14 +1,15 @@
-class Potion extends Thing{
-    public static String[] potionsName= new String[]{"Пузырек лечебного бальзама","Бутылка лечебного бальзама","Фляга лечебного бальзама"};
+class Potion extends Thing {
+    public static String[] potionsName = new String[]{"Пузырек лечебного бальзама", "Бутылка лечебного бальзама", "Фляга лечебного бальзама"};
+
     public Potion(int stage, int power, int price) {
-        super(potionsName[power-1], stage, power*stage, price);
+        super(potionsName[power - 1], stage, power * stage*3, price);
     }
 
     @Override
     public String toString() {
-        return getName()+
-                " Ур."+getStage()+
-                " Действие +"+getPower()+
-                " Цена- "+getPrice();
+        return getName() +
+                " Ур." + getStage() +
+                " Действие +" + getPower() +
+                " Цена- " + getPrice();
     }
 }

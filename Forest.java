@@ -6,7 +6,7 @@ public class Forest extends Unit {
     private List<Monster> monsters;
 
     public Forest(String name, int stage, int power) {
-        super(name+"ский", stage, power);
+        super(name+"ский лес", stage, power);
         monsters = new ArrayList<>();
         int random = new Random().nextInt(2);
         for (int i = 0; i < stage * 10; i++) {
