@@ -49,8 +49,8 @@ public class City extends Unit {
         do {
             System.out.println("Город " + this.getName() + "\n" + human.getName() + "! Куда направимся?");
             for (int i = 0; i < this.getPower(); i++)
-                System.out.println(i + 1 + ") " + this.market.get(i));
-            System.out.println("Q) Постоялый двор\nX) ТЕМНЫЙ ЛЕС");// ВЫВОДИТЬ НАЗВАНИЕ ЛЕСА
+                System.out.println(" "+(i + 1) + ") " + this.market.get(i));
+            System.out.println(" Q) Постоялый двор\n X) ТЕМНЫЙ ЛЕС");// ВЫВОДИТЬ НАЗВАНИЕ ЛЕСА
 
             String choice = Checker.check(this.getPower());
             switch (choice) {

@@ -97,13 +97,13 @@ class Market extends Unit {
             if (human.getBackPack().getThings().size() > 0) {
                 num = 0;
                 for (int i = 0; i < human.getBackPack().getThings().size(); i++)
-                    System.out.println(i + 1 + ") " + human.getBackPack().getThings().get(i));
+                    System.out.println(" "+(i + 1) + ") " + human.getBackPack().getThings().get(i));
             }
             if (!(human.getRight().getName().equals(Arms.getNamesArm(0, 0))))
-                System.out.println(human.getBackPack().getThings().size() + num++ + ") " + human.getRight());
+                System.out.println(" "+(human.getBackPack().getThings().size() + num++) + ") " + human.getRight());
             if (!(human.getLeft().getName().equals(Arms.getNamesArm(0, 0))))
-                System.out.println(human.getBackPack().getThings().size() + num + ") " + human.getLeft());
-            System.out.println("X) Ничего не продаю");
+                System.out.println(" "+(human.getBackPack().getThings().size() + num) + ") " + human.getLeft());
+            System.out.println(" X) Ничего не продаю");
             String choice = Checker.check(human.getBackPack().getThings().size() + num);
             switch (choice) {
                 case "X":
@@ -148,9 +148,9 @@ class Market extends Unit {
         while (true) {
             System.out.println("Товары в продаже:");
             for (int i = 0; i < this.stock.size(); i++)
-                System.out.println(i + 1 + ") " + this.stock.get(i));
+                System.out.println(" "+(i + 1) + ") " + this.stock.get(i));
             String i = String.valueOf(this.stock.size() + 1);
-            System.out.println(i + ") Экипировочная комната\nQ) Предложи свой товар, готов дать хорошую цену!\nX) Выход");
+            System.out.println(" "+i + ") Экипировочная комната\n Q) Предложи свой товар, готов дать хорошую цену!\n X) Выход");
             String choice = Checker.check(this.stock.size() + 1);
             switch (choice) {
                 case "X":

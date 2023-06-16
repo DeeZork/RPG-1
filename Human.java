@@ -1,8 +1,5 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 class Human extends Fighter {
     private int experience;
@@ -19,21 +16,21 @@ class Human extends Fighter {
 
     public void dressed() {
         while (true) {
-            System.out.println("Вот, что мы имеем:\nЗдоровье +" + this.getLive() + "\nМонеты +" + this.getWalet());
+            System.out.println("Вот, что мы имеем:\n Здоровье +" + this.getLive() + "\n Монеты +" + this.getWalet());
             System.out.println("Предметы в Заплечном мешке:");
             if (this.getBackPack().getThings().size() > 0) {
                 for (Thing thing : this.getBackPack().getThings()) {
-                    System.out.println(thing);
+                    System.out.println(" "+thing);
                 }
             }
             System.out.println("Правая рука - " + this.getRight().getName() + " Атака +" + this.getRight().getPower() + " Защита +" + this.getRight().getProtection());
             System.out.println("Левая рука - " + this.getLeft().getName() + " Атака +" + this.getLeft().getPower() + " Защита +" + this.getLeft().getProtection());
             System.out.println(
-                    "1) Взять оружие правой рукой\n" +
-                            "2) Взять оружие левой рукой\n" +
-                            "3) Выпить зелье\n" +
-                            "Q) Положить оружие в Заплечный мешок\n" +
-                            "X) Выход");
+                    " 1) Взять оружие правой рукой\n" +
+                            " 2) Взять оружие левой рукой\n" +
+                            " 3) Выпить зелье\n" +
+                            " Q) Положить оружие в Заплечный мешок\n" +
+                            " X) Выход");
             String choice = Checker.check(3);
             switch (choice) {
                 case "X":
@@ -41,9 +38,9 @@ class Human extends Fighter {
                 case "Q": {//Кладем оружие в мешок
                     int k = 0;
                     if (!this.getRight().getName().equals(Arms.getNamesArm(0, 0)))
-                        System.out.println(++k + ") " + this.getRight());
+                        System.out.println(" " + (++k) + ") " + this.getRight());
                     if (!this.getLeft().getName().equals(Arms.getNamesArm(0, 0)))
-                        System.out.println(++k + ") " + this.getLeft());
+                        System.out.println(" "+(++k) + ") " + this.getLeft());
                     if (k == 0) System.out.println("У тебя в руках ничего нет!");
                     else {
                         System.out.println("Что убираем?");
@@ -110,14 +107,14 @@ class Human extends Fighter {
             String clazzName = clazz.getSimpleName();
             if (clazzName.equals(classOfThing)) {
                 takeFromBackPack.add(this.getBackPack().getThings().get(i));
-                System.out.println(++j + ") " + takeFromBackPack.get(j - 1));
+                System.out.println(" "+(++j) + ") " + takeFromBackPack.get(j - 1));
             }
         }
         if (j == 0) {
             System.out.println("В мешке нет ничего подходящего...");
             return null;
         }
-        System.out.println("X) Отмена");
+        System.out.println(" X) Отмена");
         System.out.println("Что берем?");
         String choiceTake;
         do {
