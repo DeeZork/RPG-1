@@ -42,15 +42,18 @@ public class Forest extends Unit {
         for (int i = 0; i < random.nextInt(human.getStage()*3) + 1; i++)
             switch (random.nextInt(2)) {
                 case 0: {
-                    baddies.add(new Skeleton(this.getStage(),human));
-                    (Skeleton) baddies.get(i).start();
+                    Skeleton skelet=new Skeleton(this.getStage(),human);
+                    baddies.add(skelet);
+                    skelet.go();
                     break;
                 }
                 case 1: {
-                    baddies.add(new Goblin(this.getStage(),human));
-                    baddies.get(i).fight(fighters);
+                    Goblin gob=new Goblin(this.getStage(),human);
+                    baddies.add(gob);
+                    gob.go();
                 }
             }
-        human.fight(baddies);
+        human.setBuddies(baddies);
+        human.go();
     }
 }

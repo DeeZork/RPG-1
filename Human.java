@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
 
-class Human extends Fighter {
+class Human extends Fighter implements Runnable, Go {
     private int experience;
     private City place;
     private static String[] whoop = new String[]{"Так тебе!", "Получай!!", "Пошла раздача!!!"};
+    private Thread thread;
+    private List<Fighter> buddies;
 
     public Human(String name, City place) {
         super(name, 1, 5, 1000, new BackPack(1, 5, 5), whoop, 10, 5,
@@ -14,13 +16,21 @@ class Human extends Fighter {
         this.place = place;
     }
 
+    public void setPlace(City place) {
+        this.place = place;
+    }
+
+    public void setBuddies(List<Fighter> buddies) {
+        this.buddies = buddies;
+    }
+
     public void dressed() {
         while (true) {
             System.out.println("Вот, что мы имеем:\n Здоровье +" + this.getLive() + "\n Монеты +" + this.getWalet());
             System.out.println("Предметы в Заплечном мешке:");
             if (this.getBackPack().getThings().size() > 0) {
                 for (Thing thing : this.getBackPack().getThings()) {
-                    System.out.println(" "+thing);
+                    System.out.println(" " + thing);
                 }
             }
             System.out.println("Правая рука - " + this.getRight().getName() + " Атака +" + this.getRight().getPower() + " Защита +" + this.getRight().getProtection());
@@ -40,7 +50,7 @@ class Human extends Fighter {
                     if (!this.getRight().getName().equals(Arms.getNamesArm(0, 0)))
                         System.out.println(" " + (++k) + ") " + this.getRight());
                     if (!this.getLeft().getName().equals(Arms.getNamesArm(0, 0)))
-                        System.out.println(" "+(++k) + ") " + this.getLeft());
+                        System.out.println(" " + (++k) + ") " + this.getLeft());
                     if (k == 0) System.out.println("У тебя в руках ничего нет!");
                     else {
                         System.out.println("Что убираем?");
@@ -105,7 +115,7 @@ class Human extends Fighter {
             String clazzName = clazz.getSimpleName();
             if (clazzName.equals(classOfThing)) {
                 takeFromBackPack.add(this.getBackPack().getThings().get(i));
-                System.out.println(" "+(++j) + ") " + takeFromBackPack.get(j - 1));
+                System.out.println(" " + (++j) + ") " + takeFromBackPack.get(j - 1));
             }
         }
         if (j == 0) {
@@ -125,9 +135,13 @@ class Human extends Fighter {
         return takeFromBackPack.get(Integer.parseInt(choiceTake) - 1);
     }
 
-
-    public void setPlace(City place) {
-        this.place = place;
+    @Override
+    public void go() {
+        thread = new Thread(this, this.getName());
+        thread.start();
     }
-
+    @Override
+    public void run() {
+        super.fight(buddies);
+    }
 }
