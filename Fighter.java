@@ -1,6 +1,6 @@
 import java.util.List;
 
-abstract class Fighter extends Unit{
+class Fighter extends Unit {
     private int walet;
     private BackPack backPack;
     private String[] whoop;
@@ -75,4 +75,11 @@ abstract class Fighter extends Unit{
     public Arms getLeft() {
         return left;
     }
+
+    public void fight(List<Fighter> opponents){
+        for (Fighter fighter:opponents){// реализуем бой с оппонентами
+
+        }
+    }
+
 }

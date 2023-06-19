@@ -9,4 +9,5 @@ abstract class Thing extends Unit{
         super(name, stage, power);
         this.price = price;
     }
+
 }

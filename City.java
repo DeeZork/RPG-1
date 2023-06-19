@@ -2,10 +2,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class City extends Unit {
-    private static String[] cityNames = new String[]{"Тьму Таракань", "Грязюкин", "Вазюнь", "Заболотин", "Круглячий", "Дальний",
-            "Полянин", "Ближнин", "Стольнин"};
+    public static List<City> region=new ArrayList<>();
+    private static String[] cityNames = new String[]{"ТЬМУТАРАКАНЬ", "ГРЯЗЮКИН", "ВАЗЮНЬ", "ЗАБОЛОТИН", "КРУГЛЯЧИЙ", "ДАЛЬНИЙ",
+            "ПОЛЯНИН", "ЖЕЛУДЕВ", "БЛИЖНИЙ", "СТОЛЬНИН"};
 
     private List<Market> market;
+    private Forest forest;
 
     public City(int stage) {
         super(cityNames[stage - 1], stage, (int) Math.floor(Math.random() * stage * 5) + 1);
@@ -14,7 +16,15 @@ public class City extends Unit {
         for (int i = 0; i < getPower(); i++) {
             market.add(new Market("Магазин №" + (i + 1), (int) Math.floor(Math.random() * stage) + 1, (int) Math.floor(Math.random() * stage * getPower()) + 1));
         }
+        region.add(this);
+        this.forest = new Forest(this, stage);//Лес вокруг города
     }
+
+    @Override
+    public String toString() {
+        return "ГОРОД "+this.getName();
+    }
+
     private void hostel(Human human) {
         String choice;
         while (true) {
@@ -24,7 +34,7 @@ public class City extends Unit {
                     "Q) Отправиться в город\n" +
                     "X) Выход\n" +
                     "Чего изволите?\n");
-            choice = Checker.check(2);
+            choice = Checker.check(3);
             switch (choice) {
                 case "1": {
                     Main.newGame();
@@ -38,29 +48,28 @@ public class City extends Unit {
                 }
                 case "Q":
                     goToCity(human);
-                case "X": System.exit(0);
+                case "X":
+                    System.exit(0);
             }
         }
     }
 
     public void goToCity(Human human) {
         human.setPlace(this);
-        boolean flag = true;
-        do {
-            System.out.println("Город " + this.getName() + "\n" + human.getName() + "! Куда направимся?");
+        while (true) {
+            System.out.println(this + "\n" + human.getName() + "! Куда направимся?");
             for (int i = 0; i < this.getPower(); i++)
-                System.out.println(" "+(i + 1) + ") " + this.market.get(i));
-            System.out.println(" Q) Постоялый двор\n X) ТЕМНЫЙ ЛЕС");// ВЫВОДИТЬ НАЗВАНИЕ ЛЕСА
-
+                System.out.println(" " + (i + 1) + ") " + this.market.get(i));
+            System.out.println(" Q) Постоялый двор\n X) "+forest);
             String choice = Checker.check(this.getPower());
             switch (choice) {
                 case "Q":
                     hostel(human);
-//            case "X":{ goToForest(human);
-//                    break;}
+                case "X":
+                    forest.goToForest(human);
                 default:
                     this.market.get(Integer.parseInt(choice) - 1).shopping(human);
             }
-        } while (flag);
+        }
     }
 }

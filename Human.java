@@ -92,10 +92,8 @@ class Human extends Fighter {
                         this.getBackPack().getThings().remove(pot);
                         if ((this.getLive() > (this.getStage() * 10))) this.setLive(this.getStage() * 10);
                     }
-
                 }
             }
-
         }
     }
 
@@ -131,4 +129,5 @@ class Human extends Fighter {
     public void setPlace(City place) {
         this.place = place;
     }
+
 }

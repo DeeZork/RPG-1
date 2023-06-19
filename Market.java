@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 class Market extends Unit {
     private List<Thing> stock;
@@ -10,41 +11,25 @@ class Market extends Unit {
 //        stage - Уровень магазина определяет максимальный уровень вещей в нем
 //        power - определяет количество вещей в продаже
         this.stock = new ArrayList<>();
+        Random random=new Random();
         for (int i = 0; i < power; i++) {
-            switch ((int) Math.floor(Math.random() * 3)) {
+            switch (random.nextInt(3)+1) {
                 case 0: {
-                    int stageBP = (int) Math.floor(Math.random() * stage) + 1;// уровень
-                    int bpp = (int) Math.round(Math.random() * 5 * stage) + 10;// грузоподъемность рюкзака
+                    int stageBP = random.nextInt(stage) + 1;// уровень
+                    int bpp = random.nextInt(5 * stage) + 10;// грузоподъемность рюкзака
                     stock.add(new BackPack(stageBP, bpp, stage * bpp * 2));
                     break;
                 }
                 case 1: {
-                    int typA = (int) Math.floor(Math.random() * 2);
-                    int nameA = (int) Math.ceil(Math.random() * 6);// имя,всего 7 видов оружия/защиты
-                    int stageA = (int) Math.floor(Math.random() * stage) + 1;// уровень
-                    int powerA;
-                    int protectA;
-                    if (typA == 0) {
-                        powerA = (int) Math.round(Math.random() * stage * nameA * 10) + 1;// сила атаки
-                        protectA = (int) Math.round(Math.random() * stage * nameA * 3) + 1;// защита
-                    } else {
-                        powerA = (int) Math.round(Math.random() * stage * nameA * 3) + 1;// сила атаки
-                        protectA = (int) Math.round(Math.random() * stage * nameA * 10) + 1;// защита
-                    }
-                    int weigtA = (int) Math.round(Math.random() * stage * nameA * (typA + 1) * 1.5) + 1;//вес
-                    int priceA = (int) Math.round(Math.random() * stage * (powerA + protectA - weigtA + 1)) + 1;// цена
-                    stock.add(new Arms(Arms.getNamesArm(typA, nameA), stageA, powerA, priceA, protectA, weigtA));
+                    stock.add(new Arms(Arms.gen(stage)));
                     break;
                 }
                 case 2: {
-                    int stageP = (int) Math.floor(Math.random() * stage) + 1;// уровень
-                    int powerP = (int) Math.floor(Math.random() * 3) + 1;// уровень
-                    int priceP = (int) Math.floor(Math.random() * stage * powerP * 10) + 1;// уровень
-                    stock.add(new Potion(stageP, powerP, priceP));
+                    stock.add(new Potion(Potion.gen(stage)));
                 }
             }
         }
-//        stock.sort((a, b) -> a.getClass().compareTo(b.getClass())); Разобраться с сортировкой объектов по классу
+        stock.sort((a, b) -> a.getClass().getSimpleName().compareTo(b.getClass().getSimpleName())); //Сортировка объектов по классу
     }
 
     @Override
@@ -174,8 +159,5 @@ class Market extends Unit {
                 }
             }
         }
-
     }
-
-
 }
