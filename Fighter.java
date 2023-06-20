@@ -1,6 +1,10 @@
 import java.util.List;
+import java.util.Random;
 
-class Fighter extends Unit {
+class Fighter extends Unit implements Runnable, Go {
+    Thread thread;
+    private List<Fighter> fighters;
+
     private int walet;
     private BackPack backPack;
     private String[] whoop;
@@ -20,6 +24,10 @@ class Fighter extends Unit {
         this.left = left;
     }
 
+    public void setFighters(List<Fighter> fighters) {
+        this.fighters = fighters;
+    }
+
     public void setWalet(int walet) {
         this.walet = walet;
     }
@@ -28,16 +36,8 @@ class Fighter extends Unit {
         this.backPack = backPack;
     }
 
-    public void setWhoop(String[] whoop) {
-        this.whoop = whoop;
-    }
-
     public void setLive(int live) {
         this.live = live;
-    }
-
-    public void setSkill(int skill) {
-        this.skill = skill;
     }
 
     public void setRight(Arms right) {
@@ -56,10 +56,6 @@ class Fighter extends Unit {
         return backPack;
     }
 
-    public String[] getWhoop() {
-        return whoop;
-    }//реализовать отбор одного значения из массива
-
     public int getLive() {
         return live;
     }
@@ -76,10 +72,39 @@ class Fighter extends Unit {
         return left;
     }
 
-    public void fight(List<Fighter> opponents){
-        for (Fighter fighter:opponents){// реализуем бой с оппонентами
 
-        }
+    @Override
+    public void go() {
+        thread = new Thread(this, this.getName());
+        thread.start();
+        thread.interrupt();
     }
 
+    @Override
+    public void run() {
+        Random random=new Random();
+        for (Fighter fighter : fighters) {// реализуем бой с оппонентами
+            while (this.getLive() > 0 && fighter.getLive() > 0) {
+                System.out.println(this.getName()+": "+this.whoop[random.nextInt(whoop.length)]+" ");
+                if (random.nextInt(this.getSkill()+this.getRight().getPower()+this.getLeft().getPower())>
+                        random.nextInt(fighter.getSkill()+fighter.getRight().getProtection()+fighter.getLeft().getProtection())){
+                    fighter.setLive(fighter.getLive()-this.getRight().getPower()-this.getLeft().getPower());
+                    System.out.println(this.getName()+":"+this.getLive()+" "+fighter.getName()+":"+fighter.getLive());
+                }
+                if (fighter.getLive()<0)
+                    System.out.println(fighter.getName()+" убит!");
+                try {
+                    Thread.sleep(5000/this.getSkill());
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+
+//                try {
+//                    thread.wait(random.nextInt(5000/this.getSkill()));
+//                } catch (InterruptedException e) {
+//                    throw new RuntimeException(e);
+//                }
+            }
+        }
+    }
 }

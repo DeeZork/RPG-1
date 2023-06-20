@@ -1,27 +1,32 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-class Human extends Fighter implements Runnable, Go {
+class Human extends Fighter {
     private int experience;
     private City place;
     private static String[] whoop = new String[]{"Так тебе!", "Получай!!", "Пошла раздача!!!"};
-    private Thread thread;
-    private List<Fighter> buddies;
 
     public Human(String name, City place) {
-        super(name, 1, 5, 1000, new BackPack(1, 5, 5), whoop, 10, 5,
-                new Arms(Arms.getNamesArm(0, 0), 1, 1, 0, 1, 0),
-                new Arms(Arms.getNamesArm(0, 0), 1, 1, 0, 1, 0));
+        super(name, 1, 5, 1000, new BackPack(1, 5, 5), whoop, 200, 10,
+                new Arms(Arms.getNamesArm(0, 5), 1, 50, 0, 20, 5),
+                new Arms(Arms.getNamesArm(0, 4), 1, 20, 0, 50, 8));
         this.experience = 0;
         this.place = place;
+    }
+    @Override
+    public String toString() {
+        return this.getName()+" Ур."+this.getStage()+", Сила-"+this.getPower()+", В правой-"+this.getRight().getName()+
+                ", В левой-"+this.getLeft().getName();
     }
 
     public void setPlace(City place) {
         this.place = place;
     }
 
-    public void setBuddies(List<Fighter> buddies) {
-        this.buddies = buddies;
+    @Override
+    public void setFighters(List<Fighter> fighters) {
+        super.setFighters(fighters);
     }
 
     public void dressed() {
@@ -135,13 +140,4 @@ class Human extends Fighter implements Runnable, Go {
         return takeFromBackPack.get(Integer.parseInt(choiceTake) - 1);
     }
 
-    @Override
-    public void go() {
-        thread = new Thread(this, this.getName());
-        thread.start();
-    }
-    @Override
-    public void run() {
-        super.fight(buddies);
-    }
 }

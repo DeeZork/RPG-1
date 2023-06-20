@@ -13,7 +13,7 @@ class Market extends Unit {
         this.stock = new ArrayList<>();
         Random random=new Random();
         for (int i = 0; i < power; i++) {
-            switch (random.nextInt(3)+1) {
+            switch (random.nextInt(3)) {
                 case 0: {
                     int stageBP = random.nextInt(stage) + 1;// уровень
                     int bpp = random.nextInt(5 * stage) + 10;// грузоподъемность рюкзака

@@ -1,14 +1,13 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 abstract class Monster extends Fighter {
     private static String monsterName() {
-        final String letters = "QWERTYUIOPASDFGHJKLZXCVBNM";
+        final String letters = "АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЭЮЯ";
         Random random = new Random();
         String name = "";
-        for (int i = 0; i < random.nextInt(12); i++)
-            name += letters.charAt(random.nextInt(26) + 1);
+        int allNameSize=random.nextInt(12);
+        for (int i = 0; i < allNameSize; i++)
+            name += letters.charAt(random.nextInt(27) + 1);
         return name;
     }
 
