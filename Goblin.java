@@ -8,11 +8,11 @@ public class Goblin extends Monster {
 
     public Goblin(int stage, Human human) {
         super("Гоблин ", stage,
-                stage * random.nextInt(5),
+                stage * random.nextInt(5)+1,
                 stage * random.nextInt(10),
                 whoop,
-                stage * random.nextInt(6),
-                stage * random.nextInt(6),
+                stage * random.nextInt(6)+1,
+                stage * random.nextInt(6)+1,
                 new Arms(Arms.gen(stage)),
                 new Arms(Arms.gen(stage)));
         List<Fighter> opponents = new ArrayList<>();
@@ -20,9 +20,9 @@ public class Goblin extends Monster {
         super.setFighters(opponents);
     }
 
-    @Override
-    public String toString() {
-        return this.getName()+" Ур."+this.getStage()+", Сила-"+this.getPower()+", В правой-"+this.getRight().getName()+
-                ", В левой-"+this.getLeft().getName();
-    }
+//    @Override
+//    public String toString() {
+//        return this.getName()+" Ур."+this.getStage()+", Здоровье-"+this.getLive()+", В правой-"+this.getRight().getName()+
+//                ", В левой-"+this.getLeft().getName();
+//    }
 }

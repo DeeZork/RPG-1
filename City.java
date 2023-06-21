@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class City extends Unit {
-    public static List<City> region=new ArrayList<>();
+    public static List<City> region = new ArrayList<>();
     private static String[] cityNames = new String[]{"ТЬМУТАРАКАНЬ", "ГРЯЗЮКИН", "ВАЗЮНЬ", "ЗАБОЛОТИН", "КРУГЛЯЧИЙ", "ДАЛЬНИЙ",
             "ПОЛЯНИН", "ЖЕЛУДЕВ", "БЛИЖНИЙ", "СТОЛЬНИН"};
 
@@ -10,11 +10,11 @@ public class City extends Unit {
     private Forest forest;
 
     public City(int stage) {
-        super(cityNames[stage - 1], stage, (int) Math.floor(Math.random() * stage * 5) + 1);
+        super(cityNames[stage - 1], stage, (int) Math.round(Math.random() * 5)+ stage);
 //        наполняем город магазинами
         this.market = new ArrayList<>();
         for (int i = 0; i < getPower(); i++) {
-            market.add(new Market("Магазин №" + (i + 1), (int) Math.floor(Math.random() * stage) + 1, (int) Math.floor(Math.random() * stage * getPower()) + 1));
+            market.add(new Market("Магазин №" + (i + 1), (int) Math.floor(Math.random() * stage) + 1, (int) Math.round(Math.random() * getPower()) + stage));
         }
         region.add(this);
         this.forest = new Forest(this, stage);//Лес вокруг города
@@ -22,7 +22,7 @@ public class City extends Unit {
 
     @Override
     public String toString() {
-        return "ГОРОД "+this.getName();
+        return "ГОРОД " + this.getName();
     }
 
     private void hostel(Human human) {
@@ -60,7 +60,7 @@ public class City extends Unit {
             System.out.println(this + "\n" + human.getName() + "! Куда направимся?");
             for (int i = 0; i < this.getPower(); i++)
                 System.out.println(" " + (i + 1) + ") " + this.market.get(i));
-            System.out.println(" Q) Постоялый двор\n X) "+forest);
+            System.out.println(" Q) Постоялый двор\n X) " + forest);
             String choice = Checker.check(this.getPower());
             switch (choice) {
                 case "Q":

@@ -24,6 +24,10 @@ class Human extends Fighter {
         this.place = place;
     }
 
+    public City getPlace() {
+        return place;
+    }
+
     @Override
     public void setFighters(List<Fighter> fighters) {
         super.setFighters(fighters);
