@@ -81,7 +81,6 @@ class Fighter extends Unit implements Runnable, Go {
     public void go() {
         thread = new Thread(this, this.getName());
         thread.start();
-//        thread.interrupt();
     }
 
     @Override
@@ -102,19 +101,18 @@ class Fighter extends Unit implements Runnable, Go {
         if (random.nextInt(this.getSkill() + this.getRight().getPower() + this.getLeft().getPower()) >
                 random.nextInt(fighter.getSkill() + fighter.getRight().getProtection() + fighter.getLeft().getProtection())) {
             fighter.setLive(fighter.getLive() - this.getRight().getPower() - this.getLeft().getPower());
-//            System.out.println(this.getName() + "-" + this.getLive() + " : " + fighter.getName() + "-" + fighter.getLive());
-            System.out.println(this.getName() + " ----> "+fighter.getName());
+            System.out.println(this.getName() + " ----> " + fighter.getName() + "-" + (this.getRight().getPower() + this.getLeft().getPower()));
             this.setSkill(this.getSkill() + 1);
         } else System.out.println(this.getName() + "- Атака не удалась");
         if (fighter.getLive() < 0) {
             System.out.println(fighter.getName() + "- ПОВЕРЖЕН!");
 
         }
-//        try {
-//                Thread.sleep(random.nextInt(5000 / this.getSkill()));
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+            Thread.sleep(random.nextInt(3000 / this.getSkill()));
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 

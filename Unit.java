@@ -11,6 +11,10 @@ abstract class Unit {
         return stage;
     }
 
+    public void setStage(int stage) {
+        this.stage = stage;
+    }
+
     public int getPower() {
         return power;
     }

@@ -13,14 +13,14 @@ public class Forest extends Unit {
         return this.getName();
     }
 
-    private void goingTryToCity(int cityStage,Human human) {
+    private void goingTryToCity(int cityStage, Human human) {
         City city = new City(cityStage);
         city.goToCity(human);
     }
 
     public void goToForest(Human human) {
-        Random random=new Random();
-        int attempt=0;
+        Random random = new Random();
+        int attempt = 0;
         while (true) {
             System.out.println(this.getName() + "\n" + human.getName() + "! Куда направимся?");
             int i = 1;
@@ -41,25 +41,25 @@ public class Forest extends Unit {
                 }
                 case "1": {
                     if (human.getPlace().getStage() == 1) {
-                        goingTryToCity(1,human);
-                    }else {
-                        goingTryToCity(human.getPlace().getStage()-1,human);
+                        goingTryToCity(1, human);
+                    } else {
+                        goingTryToCity(human.getPlace().getStage() - 1, human);
                     }
                 }
                 case "2": {
                     if (human.getPlace().getStage() == 10) {
-                        goingTryToCity(10,human);
-                    }else if (human.getPlace().getStage() == 1){
-                        goingTryToCity(human.getPlace().getStage()+1,human);
-                    }else {
-                        goingTryToCity(human.getPlace().getStage(),human);
+                        goingTryToCity(10, human);
+                    } else if (human.getPlace().getStage() == 1) {
+                        goingTryToCity(human.getPlace().getStage() + 1, human);
+                    } else {
+                        goingTryToCity(human.getPlace().getStage(), human);
                     }
                 }
                 case "3": {
                     if (human.getPlace().getStage() == 10) {
-                        goingTryToCity(10,human);
-                    }else {
-                        goingTryToCity(human.getPlace().getStage()+1,human);
+                        goingTryToCity(10, human);
+                    } else {
+                        goingTryToCity(human.getPlace().getStage() + 1, human);
                     }
                 }
             }
@@ -98,11 +98,23 @@ public class Forest extends Unit {
                 for (Fighter monster : baddies)
                     monster.go();
                 human.fight();
+                if (human.getLive() > 0){
+                    System.out.println("\nНаша взяла! Опыт стал +" + human.getSkill() + " Здоровье: " + human.getLive() + "\n");
+                    if ((human.getSkill()/human.getStage())>100){
+                        human.setStage(human.getStage()+1);// Увеличение уровня
+                        System.out.println("Поздравляю! "+human.getName()+" достиг Уровня "+human.getStage());
+                    }
+                }
+                try {
+                    Thread.sleep(2000);//}
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
                 for (Fighter monster : baddies)
                     monster.thread.interrupt();
-
+                if (human.getLive() <= 0)
+                    Main.startGame();
             }
         }
-        if (human.getLive() > 0) System.out.println("Наша взяла! Опыт стал +" + human.getSkill());
     }
 }

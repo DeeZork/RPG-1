@@ -13,7 +13,7 @@ class Potion extends Thing {
     }
 
     public Potion(int[] gen) {
-        super(potionsName[gen[1]-1], gen[0], gen[1] * gen[0] * 3, gen[2]);
+        super(potionsName[gen[1]-1], gen[0], gen[1] * gen[0] * 30, gen[2]);
     }
 
     @Override

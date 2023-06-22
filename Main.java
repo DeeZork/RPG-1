@@ -16,7 +16,7 @@ public class Main {
         city.goToCity(human);
     }
 
-    public static void main(String[] args) {
+    public static void startGame(){
         String choice;
         do {
             System.out.println("1) Новая игра\n" +
@@ -35,5 +35,10 @@ public class Main {
             }
         }
         while (!choice.equals("X"));
+        System.exit(0);
+
+    }
+    public static void main(String[] args) {
+       startGame();
     }
 }
