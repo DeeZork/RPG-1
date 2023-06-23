@@ -36,7 +36,7 @@ public class Main {
     public static void startGame() {
         String choice;
         do {
-            System.out.println("1) Новая игра\n" +
+            System.out.println("\n1) Новая игра\n" +
                     "2) Загрузить игру\n" +
                     "X) Выход\n" +
                     "Чего изволите?\n");

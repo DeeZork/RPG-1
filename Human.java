@@ -74,10 +74,13 @@ class Human extends Fighter {
                         System.out.println(" " + (++k) + ") " + this.getRight());
                     if (!this.getLeft().getName().equals(Arms.getNamesArm(0, 0)))
                         System.out.println(" " + (++k) + ") " + this.getLeft());
-                    if (k == 0) System.out.println("У тебя в руках ничего нет!");
+                    if (k == 0)
+                        System.out.println("У тебя в руках ничего нет!");
                     else {
+                        System.out.println(" X) Передумал");
                         System.out.println("Что убираем?");
                         String choiceHands = Checker.check(k);
+                        if ((choiceHands.equals("X")||(choiceHands.equals("Q")))) break;
                         if ((choiceHands.equals("1")) && (!this.getRight().getName().equals(Arms.getNamesArm(0, 0)))) {
                             if (this.getBackPack().getFullThingsWeigt() + this.getRight().getWeight() > this.getBackPack().getPower()) {
                                 System.out.println("Твой мешок не выдержит такой нагрузки");

@@ -111,6 +111,11 @@ public class Forest extends Unit {
                     for (Fighter monster : baddies)
                         monster.go();
                     human.fight();
+                    try {
+                        Thread.sleep(random.nextInt(1000));
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     if (human.getLive() > 0) {
                         System.out.println("\nНаша взяла! Опыт стал +" + human.getSkill() + " Здоровье: " + human.getLive() + "\n");
                         flag = false;
