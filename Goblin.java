@@ -12,7 +12,7 @@ public class Goblin extends Monster {
                 stage * random.nextInt(10),
                 whoop,
                 stage * random.nextInt(30)+20,
-                stage * random.nextInt(6)+2,
+                stage * random.nextInt(10)+5,
                 new Arms(Arms.gen(stage)),
                 new Arms(Arms.gen(stage)));
         List<Fighter> opponents = new ArrayList<>();

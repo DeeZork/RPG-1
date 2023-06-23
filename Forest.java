@@ -98,11 +98,11 @@ public class Forest extends Unit {
                 for (Fighter monster : baddies)
                     monster.go();
                 human.fight();
-                if (human.getLive() > 0){
+                if (human.getLive() > 0) {
                     System.out.println("\nНаша взяла! Опыт стал +" + human.getSkill() + " Здоровье: " + human.getLive() + "\n");
-                    if ((human.getSkill()/human.getStage())>100){
-                        human.setStage(human.getStage()+1);// Увеличение уровня
-                        System.out.println("Поздравляю! "+human.getName()+" достиг Уровня "+human.getStage());
+                    if ((human.getSkill() / human.getStage()) > 100 && human.getStage() <= 10) {
+                        human.setStage(human.getStage() + 1);// Увеличение уровня
+                        System.out.println("Поздравляю! " + human.getName() + " достиг Уровня " + human.getStage());
                     }
                 }
                 try {
@@ -112,8 +112,10 @@ public class Forest extends Unit {
                 }
                 for (Fighter monster : baddies)
                     monster.thread.interrupt();
-                if (human.getLive() <= 0)
+                if (human.getLive() <= 0) {
+                    human = null;
                     Main.startGame();
+                }
             }
         }
     }
