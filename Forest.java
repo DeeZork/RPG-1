@@ -154,8 +154,8 @@ public class Forest extends Unit {
             switch (choice) {
                 case "X":
                     return;
-                case "Q": {
-                    // Выбросить вещи из мешка
+                case "Q": {// Выбросить вещи из мешка
+                    human.dispose();
                     break;
                 }
                 default: {

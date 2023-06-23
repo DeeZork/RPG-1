@@ -15,10 +15,11 @@ class Human extends Fighter {
                 new Arms(Arms.getNamesArm(0, 0), 1, 1, 0, 1, 0));
         this.place = place;
     }
+
     @Override
     public String toString() {
-        return this.getName()+" Ур."+this.getStage()+", Здоровье-"+this.getLive()+", В правой-"+this.getRight().getName()+
-                ", В левой-"+this.getLeft().getName();
+        return this.getName() + " Ур." + this.getStage() + ", Здоровье-" + this.getLive() + ", В правой-" + this.getRight().getName() +
+                ", В левой-" + this.getLeft().getName();
     }
 
     public void setPlace(City place) {
@@ -33,6 +34,7 @@ class Human extends Fighter {
     public void setFighters(List<Fighter> fighters) {
         super.setFighters(fighters);
     }
+
     public void writeGame() {
         try {
             FileOutputStream fos = new FileOutputStream(new File("RPGfile.txt"));
@@ -48,21 +50,21 @@ class Human extends Fighter {
     public void dressed() {
         while (true) {
             System.out.println("Вот, что мы имеем:\n Здоровье +" + this.getLive() + "\n Монеты +" + this.getWalet());
-            System.out.println("Предметы в Заплечном мешке:");
-            if (this.getBackPack().getThings().size() > 0) {
-                for (Thing thing : this.getBackPack().getThings()) {
-                    System.out.println(" " + thing);
-                }
-            }
-            System.out.println("Правая рука - " + this.getRight().getName() + " Атака +" + this.getRight().getPower() + " Защита +" + this.getRight().getProtection());
-            System.out.println("Левая рука - " + this.getLeft().getName() + " Атака +" + this.getLeft().getPower() + " Защита +" + this.getLeft().getProtection());
+            printHumanThings();
+            int j = 3;
+            System.out.println("\nЧто желаешь сделать?");
             System.out.println(
                     " 1) Взять оружие правой рукой\n" +
                             " 2) Взять оружие левой рукой\n" +
-                            " 3) Выпить зелье\n" +
-                            " Q) Положить оружие в Заплечный мешок\n" +
+                            " 3) Выпить зелье");
+            if (!this.getBackPack().getThings().isEmpty()) {
+                System.out.println(" 4) Выбросить вещь");
+                j++;
+            }
+            System.out.println(
+                    " Q) Положить оружие в Заплечный мешок\n" +
                             " X) Выход");
-            String choice = Checker.check(3);
+            String choice = Checker.check(j);
             switch (choice) {
                 case "X":
                     return;
@@ -116,15 +118,63 @@ class Human extends Fighter {
                     }
                     break;
                 }
-                default: {
+                case "3": {
                     Potion pot = (Potion) takeFromBackPack("Potion");
                     if (pot != null) {
                         this.setLive(this.getLive() + pot.getPower());
                         this.getBackPack().getThings().remove(pot);
                         if ((this.getLive() > (this.getStage() * 100))) this.setLive(this.getStage() * 100);
                     }
+                    break;
+                }
+                default: {//выбрасываем
+                    dispose();
                 }
             }
+        }
+    }
+
+    private int printHumanThings() {
+        int i = 0;
+        System.out.println("Все твои предметы:");
+        System.out.println(" " + (++i) + ") " + "Правая рука - " + this.getRight());
+        System.out.println(" " + (++i) + ") " + "Левая рука - " + this.getLeft());
+        if (!this.getBackPack().getThings().isEmpty()) {
+            for (Thing thing : this.getBackPack().getThings()) {
+                System.out.println(" " + (++i) + ") " + thing);
+            }
+        }
+        return i;
+    }
+
+    public void dispose() {
+        while (true) {
+            int check = printHumanThings();
+            System.out.println(" Q) Выбросить деньги\n X) Ничего не выбрасываем");
+            System.out.println("Что выбрасываем?");
+            String choice = Checker.check(check);
+            System.out.println("Уверен? (Q-да/X-нет)");
+            if (Checker.check(0).equals("Q"))
+                switch (choice) {
+                    case "X":
+                        return;
+                    case "Q": {
+                        this.setWalet(0);
+                        break;
+                    }
+                    case "1": {
+                        this.setRight(new Arms(Arms.getNamesArm(0, 0), 1, 1, 0, 1, 0));
+                        break;
+                    }
+                    case "2": {
+                        this.setLeft(new Arms(Arms.getNamesArm(0, 0), 1, 1, 0, 1, 0));
+                        break;
+                    }
+                    default: {
+                        this.getBackPack().getThings().remove(this.getBackPack().getThings().get(Integer.parseInt(choice) - 3));
+                    }
+
+                }
         }
     }
 
@@ -132,8 +182,7 @@ class Human extends Fighter {
         List<Thing> takeFromBackPack = new ArrayList<>();
         int j = 0;
         for (int i = 0; i < this.getBackPack().getThings().size(); i++) {
-            Class<?> clazz = this.getBackPack().getThings().get(i).getClass();
-            String clazzName = clazz.getSimpleName();
+            String clazzName = this.getBackPack().getThings().get(i).getClass().getSimpleName();
             if (clazzName.equals(classOfThing)) {
                 takeFromBackPack.add(this.getBackPack().getThings().get(i));
                 System.out.println(" " + (++j) + ") " + takeFromBackPack.get(j - 1));
