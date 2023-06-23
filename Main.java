@@ -25,7 +25,8 @@ public class Main {
             Human human = (Human) ois.readObject();
             fis.close();
             ois.close();
-            human.getPlace().goToCity(human);
+            City city=new City(human.getPlace().getStage());
+            city.goToCity(human);
         } catch (Exception ex) {
             System.out.println("Возникла ошибка во время чтения, проверьте данные.");
         }
