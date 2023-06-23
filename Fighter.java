@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.Random;
 
-class Fighter extends Unit implements Runnable, Go {
+class Fighter extends Unit implements Runnable {
     Thread thread;
     private List<Fighter> fighters;
 
@@ -77,7 +77,6 @@ class Fighter extends Unit implements Runnable, Go {
     }
 
 
-    @Override
     public void go() {
         thread = new Thread(this, this.getName());
         thread.start();

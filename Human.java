@@ -6,9 +6,9 @@ class Human extends Fighter {
     private static String[] whoop = new String[]{"Так тебе!", "Получай!!", "Пошла раздача!!!"};
 
     public Human(String name, City place) {
-        super(name, 1, 5, 50, new BackPack(1, 5, 5), whoop, 100, 5,
-                new Arms(Arms.getNamesArm(0, 5), 1, 50, 0, 20, 5),
-                new Arms(Arms.getNamesArm(0, 4), 1, 20, 0, 50, 8));
+        super(name, 1, 5, 100, new BackPack(1, 5, 5), whoop, 100, 5,
+                new Arms(Arms.getNamesArm(0, 0), 1, 1, 0, 1, 0),
+                new Arms(Arms.getNamesArm(0, 0), 1, 1, 0, 1, 0));
         this.place = place;
     }
     @Override
