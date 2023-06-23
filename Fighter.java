@@ -108,7 +108,7 @@ class Fighter extends Unit implements Runnable {
 
         }
         try {
-            Thread.sleep(random.nextInt(3000 / this.getSkill()));
+            Thread.sleep(random.nextInt(10000 / this.getSkill()));
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
