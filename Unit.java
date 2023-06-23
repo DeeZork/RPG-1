@@ -1,4 +1,6 @@
-abstract class Unit {
+import java.io.Serializable;
+
+abstract class Unit implements Serializable {
     private String name;
     private int stage;
     private int power;

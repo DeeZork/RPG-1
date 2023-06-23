@@ -1,9 +1,10 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.Serializable;
 
-class Human extends Fighter implements Serializable{
+class Human extends Fighter {
 
     private City place;
     private static String[] whoop = new String[]{"Так тебе!", "Получай!!", "Пошла раздача!!!"};
@@ -36,7 +37,6 @@ class Human extends Fighter implements Serializable{
         try {
             FileOutputStream fos = new FileOutputStream(new File("RPGfile.txt"));
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeInt(this.getPlace().getStage());
             oos.writeObject(this);
             fos.close();
             oos.close();

@@ -20,13 +20,12 @@ public class Main {
 
     public static void loadGame() {
         try {
-            FileInputStream fis = new FileInputStream(new File("RPGfile.txt"));
+            FileInputStream fis = new FileInputStream("RPGfile.txt");
             ObjectInputStream ois = new ObjectInputStream(fis);
-            City city = new City(ois.readInt());
             Human human = (Human) ois.readObject();
             fis.close();
             ois.close();
-            city.goToCity(human);
+            human.getPlace().goToCity(human);
         } catch (Exception ex) {
             System.out.println("Возникла ошибка во время чтения, проверьте данные.");
         }
