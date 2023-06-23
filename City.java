@@ -41,9 +41,11 @@ public class City extends Unit {
                     break;
                 }
                 case "2": {//реализовать загрузку состояния игры из файла
+                    Main.loadGame();
                     break;
                 }
                 case "3": {//реализовать запись состояния игры в файл
+                    human.writeGame();
                     break;
                 }
                 case "Q":

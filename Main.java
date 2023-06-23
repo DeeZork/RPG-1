@@ -1,7 +1,9 @@
+import java.io.*;
+
 public class Main {
 
     public static void newGame() {
-        System.out.println("\n\n\n\n\n\n\nДавным-давно это было! " +
+        System.out.println("\n\n\n\nДавным-давно это было! " +
                 "\nЛеса захватла Нечисть Поганая! И сладить с ней никто был не в силах. " +
                 "\nВ ту пору местными городами правил злобный князь, а звали его - Вырубка. " +
                 "\nИ любил этот Вырубка девиц молоденьких похищать, в неволе у себя держать да поганить." +
@@ -16,7 +18,22 @@ public class Main {
         city.goToCity(human);
     }
 
-    public static void startGame(){
+    public static void loadGame() {
+        try {
+            FileInputStream fis = new FileInputStream(new File("RPGfile.txt"));
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            City city = new City(ois.readInt());
+            Human human = (Human) ois.readObject();
+            fis.close();
+            ois.close();
+            city.goToCity(human);
+        } catch (Exception ex) {
+            System.out.println("Возникла ошибка во время чтения, проверьте данные.");
+        }
+    }
+
+
+    public static void startGame() {
         String choice;
         do {
             System.out.println("1) Новая игра\n" +
@@ -28,6 +45,7 @@ public class Main {
                 case "1":
                     newGame();
                 case "2": {//реализовать загрузку состояния игры из файла
+                    loadGame();
                     break;
                 }
                 case "Q":
@@ -38,7 +56,8 @@ public class Main {
         System.exit(0);
 
     }
+
     public static void main(String[] args) {
-       startGame();
+        startGame();
     }
 }

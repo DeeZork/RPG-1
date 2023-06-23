@@ -1,7 +1,10 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
-class Human extends Fighter {
+class Human extends Fighter implements Serializable{
+
     private City place;
     private static String[] whoop = new String[]{"Так тебе!", "Получай!!", "Пошла раздача!!!"};
 
@@ -28,6 +31,18 @@ class Human extends Fighter {
     @Override
     public void setFighters(List<Fighter> fighters) {
         super.setFighters(fighters);
+    }
+    public void writeGame() {
+        try {
+            FileOutputStream fos = new FileOutputStream(new File("RPGfile.txt"));
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeInt(this.getPlace().getStage());
+            oos.writeObject(this);
+            fos.close();
+            oos.close();
+        } catch (Exception ex) {
+            System.out.println("Возникла ошибка во время записи, проверьте данные.");
+        }
     }
 
     public void dressed() {
