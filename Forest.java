@@ -105,13 +105,13 @@ public class Forest extends Unit {
                         System.out.println("Поздравляю! " + human.getName() + " достиг Уровня " + human.getStage());
                     }
                 }
-                try {
-                    Thread.sleep(2000);//}
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                for (Fighter monster : baddies)
-                    monster.thread.interrupt();
+//                try {
+//                    Thread.sleep(2000);//}
+//                } catch (InterruptedException e) {
+//                    throw new RuntimeException(e);
+//                }
+//                for (Fighter monster : baddies)
+//                    monster.thread.interrupt();
                 if (human.getLive() <= 0) {
                     human = null;
                     Main.startGame();
