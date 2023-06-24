@@ -85,7 +85,7 @@ class Market extends Unit {
             if (!(human.getRight().getName().equals(Arms.getNamesArm(0, 0))))
                 System.out.println(" " + (num++) + ") " + human.getRight());
             if (!(human.getLeft().getName().equals(Arms.getNamesArm(0, 0))))
-                System.out.println(" " + (human.getBackPack().getThings().size() + num) + ") " + human.getLeft());
+                System.out.println(" " + num + ") " + human.getLeft());
             System.out.println(" X) Ничего не продаю");
             String choice = Checker.check(human.getBackPack().getThings().size() + num);
             switch (choice) {

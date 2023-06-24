@@ -44,6 +44,8 @@ class Human extends Fighter {
             oos.close();
         } catch (Exception ex) {
             System.out.println("Возникла ошибка во время записи, проверьте данные.");
+            throw new RuntimeException();
+
         }
     }
 

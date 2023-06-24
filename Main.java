@@ -29,6 +29,7 @@ public class Main {
             city.goToCity(human);
         } catch (Exception ex) {
             System.out.println("Возникла ошибка во время чтения, проверьте данные.");
+            throw new RuntimeException();
         }
     }
 

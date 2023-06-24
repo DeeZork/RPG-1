@@ -15,7 +15,7 @@ public class Forest extends Unit {
 
     private void goingTryToCity(int cityStage, Human human) {
         Random random = new Random();
-        if (random.nextInt(100) > 65) {
+        if (random.nextInt(100) > 70) {
             City city = new City(cityStage);
             city.goToCity(human);
         } else {
