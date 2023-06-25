@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class City extends Unit {
+public class City extends Unit{
     public static List<City> region = new ArrayList<>();
     private static String[] cityNames = new String[]{"ТЬМУТАРАКАНЬ", "ГРЯЗЮКИН", "ВАЗЮНЬ", "ЗАБОЛОТИН", "КРУГЛЯЧИЙ", "ДАЛЬНИЙ",
             "ПОЛЯНИН", "ЖЕЛУДЕВ", "БЛИЖНИЙ", "СТОЛЬНИН"};

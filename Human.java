@@ -37,14 +37,15 @@ class Human extends Fighter {
 
     public void writeGame() {
         try {
-            FileOutputStream fos = new FileOutputStream(new File("RPGfile.txt"));
+            FileOutputStream fos = new FileOutputStream(new File("RPGfile.bin"));
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(this);
             fos.close();
             oos.close();
         } catch (Exception ex) {
             System.out.println("Возникла ошибка во время записи, проверьте данные.");
-            throw new RuntimeException();
+            ex.printStackTrace();
+
 
         }
     }
@@ -52,6 +53,8 @@ class Human extends Fighter {
     public void dressed() {
         while (true) {
             System.out.println("Вот, что мы имеем:\n Здоровье +" + this.getLive() + "\n Монеты +" + this.getWalet());
+            System.out.println("Твой мешок загружен на " + this.getBackPack().getFullThingsWeigt() + "кг из " +
+                    this.getBackPack().getPower() + " кг возможных");
             printHumanThings();
             int j = 3;
             System.out.println("\nЧто желаешь сделать?");
@@ -82,7 +85,7 @@ class Human extends Fighter {
                         System.out.println(" X) Передумал");
                         System.out.println("Что убираем?");
                         String choiceHands = Checker.check(k);
-                        if ((choiceHands.equals("X")||(choiceHands.equals("Q")))) break;
+                        if ((choiceHands.equals("X") || (choiceHands.equals("Q")))) break;
                         if ((choiceHands.equals("1")) && (!this.getRight().getName().equals(Arms.getNamesArm(0, 0)))) {
                             if (this.getBackPack().getFullThingsWeigt() + this.getRight().getWeight() > this.getBackPack().getPower()) {
                                 System.out.println("Твой мешок не выдержит такой нагрузки");

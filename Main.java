@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class Main {
+public class Main{
 
     public static void newGame() {
         System.out.println("\n\n\n\nДавным-давно это было! " +
@@ -20,7 +20,7 @@ public class Main {
 
     public static void loadGame() {
         try {
-            FileInputStream fis = new FileInputStream("RPGfile.txt");
+            FileInputStream fis = new FileInputStream("RPGfile.bin");
             ObjectInputStream ois = new ObjectInputStream(fis);
             Human human = (Human) ois.readObject();
             fis.close();
@@ -29,7 +29,7 @@ public class Main {
             city.goToCity(human);
         } catch (Exception ex) {
             System.out.println("Возникла ошибка во время чтения, проверьте данные.");
-            throw new RuntimeException();
+            ex.printStackTrace();
         }
     }
 
