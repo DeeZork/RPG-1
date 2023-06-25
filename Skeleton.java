@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Skeleton extends Monster {
-    static String[] whoop = new String[]{"УаааУ", "ГГрруу", "Баззз"};
+    static final String[] whoop = new String[]{"УаааУ", "ГГрруу", "Баззз"};
     private static Random random = new Random();
 
     public Skeleton(int stage, Human human) {

@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Goblin extends Monster {
-    static String[] whoop = new String[]{"АшшшАА", "РушшАА", "Бушша"};
+    static final String[] whoop = new String[]{"АшшшАА", "РушшАА", "Бушша"};
     private static Random random = new Random();
 
     public Goblin(int stage, Human human) {

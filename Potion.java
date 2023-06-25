@@ -1,7 +1,7 @@
 import java.util.Random;
 
 class Potion extends Thing {
-    public static String[] potionsName = new String[]{"Пузырек лечебного бальзама", "Бутылка лечебного бальзама", "Фляга лечебного бальзама"};
+    public final static String[] potionsName = new String[]{"Пузырек лечебного бальзама", "Бутылка лечебного бальзама", "Фляга лечебного бальзама"};
     private static Random random = new Random();
 
     public static int[] gen(int stage) {
