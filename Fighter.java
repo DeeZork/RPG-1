@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.Random;
 
 class Fighter extends Unit implements Runnable {
-    Thread thread;
+    transient Thread thread;
     private List<Fighter> fighters;
 
     private int walet;
